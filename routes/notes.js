@@ -6,7 +6,7 @@ const knex = require('../knex');
 const router = express.Router();
 
 /* ========== GET/READ ALL NOTES ========== */
-router.get('/notes', (req, res, next) => {
+router.get('/', (req, res, next) => {
   const searchTerm = req.query.searchTerm;
   const folderId = req.query.folderId;
 
@@ -33,7 +33,7 @@ router.get('/notes', (req, res, next) => {
 });
 
 /* ========== GET/READ SINGLE NOTES ========== */
-router.get('/notes/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const noteId = req.params.id;
 
   knex.first('notes.id', 'title', 'content', 'folder_id', 'folders.name as folderName')
@@ -53,7 +53,7 @@ router.get('/notes/:id', (req, res, next) => {
 });
 
 /* ========== POST/CREATE ITEM ========== */
-router.post('/notes', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const { title, content, folderId } = req.body;
 
   /***** Never trust users. Validate input *****/
@@ -90,7 +90,7 @@ router.post('/notes', (req, res, next) => {
 });
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
-router.put('/notes/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   const noteId = req.params.id;
   const { title, content, folderId } = req.body;
 
@@ -131,7 +131,7 @@ router.put('/notes/:id', (req, res, next) => {
 });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
-router.delete('/notes/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   knex.del()
     .where('id', req.params.id)
     .from('notes')

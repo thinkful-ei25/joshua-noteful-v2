@@ -6,17 +6,19 @@ const router = express.Router();
 const knex = require('../knex');
 
 /* ========== GET/READ ALL TAGS ========== */
-router.get('/folders', (req, res, next) => {
+router.get('/', (req, res, next) => {
   knex.select('id', 'name')
     .from('folders')
     .then(results => {
       res.json(results);
     })
-    .catch(next);
+    .catch(err => {
+      next(err);
+    });
 });
 
 /* ========== GET/READ SINGLE TAGS ========== */
-router.get('/folders/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   knex.first('id', 'name')
     .where('id', req.params.id)
     .from('folders')
@@ -27,11 +29,13 @@ router.get('/folders/:id', (req, res, next) => {
         next();
       }
     })
-    .catch(next);
+    .catch(err => {
+      next(err);
+    });
 });
 
 /* ========== POST/CREATE ITEM ========== */
-router.post('/folders', (req, res, next) => {
+router.post('/', (req, res, next) => {
   const { name } = req.body;
 
   /***** Never trust users. Validate input *****/
@@ -50,11 +54,13 @@ router.post('/folders', (req, res, next) => {
       const result = results[0];
       res.location(`${req.originalUrl}/${result.id}`).status(201).json(result);
     })
-    .catch(err => next(err));
+    .catch(err => {
+      next(err);
+    });
 });
 
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
-router.put('/folders/:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
   const { name } = req.body;
 
   /***** Never trust users. Validate input *****/
@@ -77,18 +83,22 @@ router.put('/folders/:id', (req, res, next) => {
         next();
       }
     })
-    .catch(err => next(err));
+    .catch(err => {
+      next(err);
+    });
 });
 
 /* ========== DELETE/REMOVE A SINGLE ITEM ========== */
-router.delete('/folders/:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   knex.del()
     .where('id', req.params.id)
     .from('folders')
     .then(() => {
       res.status(204).end();
     })
-    .catch(next);
+    .catch(err => {
+      next(err);
+    });
 });
 
 module.exports = router;
