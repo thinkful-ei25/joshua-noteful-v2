@@ -13,15 +13,15 @@ CREATE TABLE notes (
   id serial PRIMARY KEY,
   title text NOT NULL,
   content text,
-  created timestamp DEFAULT now()
-  -- folder_id int REFERENCES folders(id) ON DELETE SET NULL;
+  created timestamp DEFAULT now(),
+  folder_id int REFERENCES folders(id) ON DELETE SET NULL
 );
 
 ALTER SEQUENCE notes_id_seq RESTART WITH 1000;
 
 -- If you delete a folder then set folder_id to null on related notes
 -- IOW, delete a folder and move the notes to "uncategorized"
-ALTER TABLE notes ADD COLUMN folder_id int REFERENCES folders(id) ON DELETE SET NULL;
+-- ALTER TABLE notes ADD COLUMN folder_id int REFERENCES folders(id) ON DELETE SET NULL;
 
 -- Prevent folders from being deleted if are referenced by any note
 -- IOW, only empty folder can be deleted
