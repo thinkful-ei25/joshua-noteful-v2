@@ -1,4 +1,4 @@
--- psql -U dev -d noteful -f ./db/noteful.sql
+-- psql -U dev -d noteful-app -f ./db/noteful.sql
 
 DROP TABLE IF EXISTS notes;
 
