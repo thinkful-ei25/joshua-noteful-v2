@@ -1,4 +1,6 @@
--- psql -U josh -d noteful-app -f ./db/noteful.sql
+-- psql -U josh -d noteful2-app -f ./db/noteful.sql
+DROP TABLE IF EXISTS notes;
+
 DROP TABLE IF EXISTS folders;
 
 CREATE TABLE folders (
@@ -13,7 +15,7 @@ INSERT INTO folders (name) VALUES
   ('Personal'),
   ('Work');
 
-DROP TABLE IF EXISTS notes;
+
 
 CREATE TABLE notes (
   id serial PRIMARY KEY,
