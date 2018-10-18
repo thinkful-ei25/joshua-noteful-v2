@@ -1,4 +1,4 @@
--- psql -U dev -d noteful-app -f ./db/noteful.sql
+-- psql -U dev -d noteful2-app -f ./db/noteful.sql
 
 DROP TABLE IF EXISTS notes;
 DROP TABLE IF EXISTS folders;
@@ -82,6 +82,11 @@ INSERT INTO notes (title, content, folder_id) VALUES
     '11 ways investing in cats can make you a millionaire',
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
     , NULL
+  ),
+  (
+    'This is a test for the DB',
+    'Pay no attention to the man behind the curtain',
+    100
   ),
   (
     'Why you should forget everything you learned about cats',
